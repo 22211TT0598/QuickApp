@@ -1,26 +1,19 @@
 package com.example.quickapp.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.quickapp.R;
-import com.example.quickapp.activity.ListQuestionActivity;
-import com.example.quickapp.activity.MainActivity;
 import com.example.quickapp.activity.UpdateQuestionActivity;
 import com.example.quickapp.models.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowQuestionAdapter extends BaseAdapter {

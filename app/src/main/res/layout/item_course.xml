@@ -3,14 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="wrap_content"
     tools:context=".activity.CourseActivity"
-=======
-    android:layout_height="match_parent"
-    tools:context=".activity.CourseActivity"
     android:gravity="center_horizontal"
->>>>>>> b65a0145ffb89d9cc2aa5bb30f6fc21d9acb2952
     android:orientation="vertical">
     <TextView
         android:id="@+id/tvDD"
@@ -19,10 +14,7 @@
         android:text="Lập trình Di Động"
         android:gravity="start"
         android:padding="20dp"
-<<<<<<< HEAD
-=======
         android:layout_marginTop="20dp"
->>>>>>> b65a0145ffb89d9cc2aa5bb30f6fc21d9acb2952
         android:textColor="#E2592D"
         android:drawableRight="@drawable/baseline_arrow_forward_ios_24"
         android:background="@drawable/shape_border_radius"

@@ -23,26 +23,25 @@
     <Button
         android:id="@+id/btnJoin"
         android:layout_marginTop="25dp"
-        android:layout_marginHorizontal="50sp"
-
+        android:layout_marginHorizontal="70sp"
+        android:paddingVertical="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:backgroundTint="@color/white"
+        android:gravity="center"
         android:textColor="#E2592D"
-        android:text="JOIN EXAM"
-        android:visibility="gone"/>
+        android:text="JOIN EXAM"/>
     <Button
         android:id="@+id/btnHistory"
         android:layout_marginTop="25dp"
-        android:layout_marginHorizontal="50sp"
+        android:layout_marginHorizontal="70sp"
+        android:paddingVertical="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:backgroundTint="@color/white"
+        android:gravity="center"
         android:textColor="#E2592D"
-        android:text="HISTORY"
-        android:visibility="gone"/>
+        android:text="HISTORY"/>
     <Button
         android:id="@+id/btnListQuestion"
         android:layout_marginTop="25dp"

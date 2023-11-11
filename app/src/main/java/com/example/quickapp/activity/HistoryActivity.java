@@ -1,12 +1,7 @@
 package com.example.quickapp.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,8 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
 import com.example.quickapp.adapter.HistoryAdapter;
@@ -28,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
+    Toolbar toolbar;
     HistoryAdapter adapter;
-    ImageView btnkiem,btnBack,btnMenu;
+    ImageView btnkiem;
     LinearLayout btnDelete,btnSearch;
     ListView lstDS;
-    List<History>danhsachlichsu=new ArrayList<>();
     List<History>danhsachTimKiem=new ArrayList<>();
     EditText edtTimKIem;
 
@@ -43,34 +42,27 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_history);
         SetControl();
         SetEvent();
-        registerForContextMenu(btnMenu);
     }
 
     private void SetControl() {
         edtTimKIem=findViewById(R.id.edtTimKIem);
         btnkiem=findViewById(R.id.btnKiem);
         btnSearch=findViewById(R.id.btnSearch);
-        btnBack=findViewById(R.id.btnBack);
-        btnMenu=findViewById(R.id.btnMenu);
+        toolbar=findViewById(R.id.toolbar);
         btnDelete=findViewById(R.id.btnDelete);
         lstDS=findViewById(R.id.lstDS);
-        danhsachlichsu=new ArrayList<>();
-        danhsachlichsu.add(new History("22211TT0826","Nguyễn Phong Phú","2","12"));
-        danhsachlichsu.add(new History("22211TT0085","Phạm Thế Minh","1","13"));
-        danhsachlichsu.add(new History("22211TT05898","Phạm Thị Bảo Châu","0","14"));
-         adapter= new HistoryAdapter(danhsachlichsu,this);
-        lstDS.setAdapter(adapter);
-
-
     }
 
     private void SetEvent() {
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        //Set toolbar
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Danh sách môn học");
+
+        adapter= new HistoryAdapter(MainActivity.danhsachlichsu,this);
+        lstDS.setAdapter(adapter);
 
         lstDS.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -80,7 +72,7 @@ public class HistoryActivity extends AppCompatActivity {
                 btnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        danhsachlichsu.remove(position);
+                        MainActivity.danhsachlichsu.remove(position);
                         adapter.notifyDataSetChanged();
                         btnDelete.setVisibility(View.GONE);
                     }
@@ -108,7 +100,7 @@ public class HistoryActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.btnXoaTatCa)
         {
-            danhsachlichsu.clear();
+            MainActivity.danhsachlichsu.clear();
             adapter.notifyDataSetChanged();
         }
         if(item.getItemId()==R.id.btnTim)
@@ -129,7 +121,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 if (actionId== EditorInfo.IME_ACTION_GO){
                     danhsachTimKiem.clear();
-                    for (History item:danhsachlichsu) {
+                    for (History item:MainActivity.danhsachlichsu) {
                         if ((item.getMssv()).contains(v.getText())){
                             danhsachTimKiem.add(item);
                         }

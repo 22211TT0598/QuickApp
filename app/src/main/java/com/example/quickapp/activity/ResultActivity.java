@@ -2,17 +2,24 @@ package com.example.quickapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
+import com.example.quickapp.models.History;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
-    ImageView btnQuay;
+    Toolbar toolbar;
     Button btnHome;
     TextView tvDiem;
     int dem;
@@ -28,6 +35,9 @@ public class ResultActivity extends AppCompatActivity {
        cauHoi=getIntent().getIntExtra("getTotalQuestion", 0);
        int kq=(10/cauHoi)*dem;
        tvDiem.setText(String.valueOf(kq));
+        long dateEnd= SystemClock.elapsedRealtime()/1000;
+
+        MainActivity.danhsachlichsu.add(new History("22211TT0826","phu",String.valueOf(kq),String.valueOf(dateEnd-JoinActivity.dateStart)+" Giây"));
     }
 
     private void SetEvent() {
@@ -36,20 +46,12 @@ public class ResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent itn = new Intent(ResultActivity.this, MainActivity.class);
                 startActivity(itn);
-
             }
         });
-        btnQuay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
     }
 
     private void setControl() {
-        btnQuay = findViewById(R.id.btnQuay);
+        toolbar = findViewById(R.id.toolbar);
         btnHome = findViewById(R.id.btnHome);
         tvDiem = findViewById(R.id.tvDiem);
     }

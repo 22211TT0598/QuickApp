@@ -42,11 +42,11 @@ public class SlideQuestionFragment extends Fragment
         TextView tv=view.findViewById(R.id.Cau1);
         tv.setText(question.getTitle());
         RadioButton radA=(RadioButton)view.findViewById(R.id.radA);
-        radA.setText(question.getAnswers().get(0).getText());
+        radA.setText(question.getAnswers().get(0));
         RadioButton radb=(RadioButton)view.findViewById(R.id.radB);
-        radb.setText(question.getAnswers().get(1).getText());
+        radb.setText(question.getAnswers().get(1));
         RadioButton radc=(RadioButton)view.findViewById(R.id.radC);
-        radc.setText(question.getAnswers().get(2).getText());
+        radc.setText(question.getAnswers().get(2));
 
     }
 }

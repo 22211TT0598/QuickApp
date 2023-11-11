@@ -1,5 +1,5 @@
 package com.example.quickapp.adapter;
-import android.app.Activity;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.quickapp.R;
-import com.example.quickapp.activity.HistoryActivity;
 import com.example.quickapp.models.History;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends BaseAdapter {
