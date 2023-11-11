@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".activity.CourseActivity"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvDD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lập trình Di Động"
+        android:gravity="start"
+        android:padding="20dp"
+        android:textColor="#E2592D"
+        android:drawableRight="@drawable/baseline_arrow_forward_ios_24"
+        android:background="@drawable/shape_border_radius"
+        android:drawableTint="#E2592D"/>
+</LinearLayout>

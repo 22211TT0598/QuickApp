@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/layoutScreen">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Cau 1"
+        android:textColor="#785C53"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        android:text="Mời bạn nhập câu hỏi"
+        android:textColor="#785C53"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/edittext_focused"
+        android:padding="10sp"
+        android:textColor="#785C53"
+        android:textSize="16sp"
+        android:imeOptions="actionNext"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        android:text="Mời bạn nhập đáp án A"
+        android:textColor="#785C53"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDapAnA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/edittext_focused"
+        android:padding="10sp"
+        android:textColor="#785C53"
+        android:textSize="16sp"
+        android:imeOptions="actionNext"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        android:text="Mời bạn nhập đáp án B"
+        android:textColor="#785C53"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDapAnB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/edittext_focused"
+        android:padding="10sp"
+        android:textColor="#785C53"
+        android:textSize="16sp"
+        android:imeOptions="actionNext"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        android:text="Mời bạn nhập đáp án C"
+        android:textColor="#785C53"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edtDapAnC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/edittext_focused"
+        android:padding="10sp"
+        android:textColor="#785C53"
+        android:textSize="16sp"
+        android:imeOptions="actionDone"/>
+
+    <TextView
+        android:id="@+id/tvCorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10sp"
+        android:text="Chọn đáp án đúng"
+        android:textColor="#785C53"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinnerCorrect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        />
+
+</LinearLayout>

@@ -12,7 +12,35 @@
         android:theme="@style/Theme.QuickApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.UpdateQuestionActivity"
+            android:exported="false"
+             android:parentActivityName=".activity.ListQuestionActivity"/>
+        <activity
+            android:name=".activity.AddQuestionActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.ListQuestionActivity"/>
+        <activity
+            android:name=".activity.ListQuestionActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.TopicActivity"/>
+        <activity
+            android:name=".activity.TopicActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.CourseActivity"/>
+        <activity
+            android:name=".activity.CourseActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity"/>
+        <activity
+            android:name=".activity.CreateExamDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity"/>
+        <activity
+            android:name=".activity.CreateExamActivity"
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CreateExamActivity"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E2592D"/>
+
+    <ImageView
+        android:id="@+id/imgComputer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40sp"
+        android:layout_weight="1"
+        android:src="@drawable/computer"
+        app:layout_constraintBottom_toTopOf="@id/layoutContent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/layoutContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginTop="50sp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="Tạo bài kiểm tra mới"
+            android:textColor="#E2592D"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:text="Mời bạn nhập môn học"
+            android:textColor="#785C53"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/edittext_focused"
+            android:padding="10sp"
+            android:textColor="#785C53"
+            android:textSize="16sp"
+            android:imeOptions="actionNext"
+            android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:text="Mời bạn nhập số câu hỏi"
+            android:textColor="#785C53"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtNumberQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/edittext_focused"
+            android:inputType="number"
+            android:padding="10sp"
+            android:textColor="#785C53"
+            android:textSize="16sp"
+            android:imeOptions="actionDone"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="30sp"
+        android:layout_marginEnd="20sp"
+        android:backgroundTint="#E2592D"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_gravity="end"
+        android:enabled="false"/>
+
+</LinearLayout>
