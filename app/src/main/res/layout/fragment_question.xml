@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingRight="100dp"
+        android:text="câu 1 Chọn đáp án đúng "
+        android:textColor="#9C9090"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:id="@+id/Cau1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:text="Câu 1. Các ứng dụng di động có thể được phân thành mấy loại? Kể tên?"
+        android:textSize="23dp"
+        android:gravity="center"
+        android:textColor="@color/black"></TextView>
+    <RadioGroup
+        android:id="@+id/grpRad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="A.3 loại, bao gồm nền tảng gốc (native), nền tảng lai (hybrid) và đa nền tảng."
+            android:textColor="@color/black"
+            android:textSize="21dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="B.2 loại, bao gồm nền tảng gốc (native) và nền tảng lai (hybrid)."
+            android:textColor="@color/black"
+            android:textSize="21dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="C.2 loại, bao gồm nền tảng gốc (native) và đa nền tảng."
+            android:textColor="@color/black"
+            android:textSize="21dp"></RadioButton>
+
+    </RadioGroup>
+</LinearLayout>
