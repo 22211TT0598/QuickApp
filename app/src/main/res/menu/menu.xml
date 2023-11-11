@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btnTim"
+        android:title="Tìm kiếm" />
+    <item
+        android:id="@+id/btnHouse"
+        android:title="Về trang chủ" />
+    <item
+        android:id="@+id/btnXoaTatCa"
+        android:title="Xóa Tất Cả" />
+</menu>

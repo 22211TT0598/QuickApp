@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity"
     android:gravity="center_horizontal"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
@@ -16,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:id="@+id/btnBacks"
+                android:id="@+id/btnQuay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -28,7 +27,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="23dp"
-                android:text="QUICK APP"
+                android:text="Lập trình di động"
                 android:textColor="@color/white"/>
         </LinearLayout>
 
@@ -37,20 +36,26 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:paddingRight="200dp"
-        android:text="Mời bạn chọn đề..."
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingRight="100dp"
+        android:text=" Số điểm của bạn là :"
         android:textColor="#9C9090"
-        android:layout_marginHorizontal="20dp"
-        android:textSize="20dp">
-
-    </TextView>
-    <ListView
-        android:id="@+id/lstDSD"
+        android:textSize="25dp"></TextView>
+    <TextView
+        android:id="@+id/tvDiem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp">
-    </ListView>
+        android:textSize="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"></TextView>
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Back to Home Page"
+        android:backgroundTint="#E2592D"></Button>
+
 </LinearLayout>
