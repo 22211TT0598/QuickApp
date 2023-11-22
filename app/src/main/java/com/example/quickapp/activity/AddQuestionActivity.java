@@ -15,6 +15,9 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbAnswer;
+import com.example.quickapp.database.DbQuestion;
+import com.example.quickapp.models.Answer;
 import com.example.quickapp.models.Question;
 
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnFoc
     Spinner spnCorrect;
     Button btnFinish;
     int questionId;
+    DbQuestion dbQuestion=new DbQuestion(this,null,null,1);
+    DbAnswer dbAnswer=new DbAnswer(this,null,null,1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +65,13 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnFoc
             @Override
             public void onClick(View view) {
                 String contentQuestion = edtQuestion.getText().toString().trim();
-                List<String> answers=new ArrayList<>();
-                answers.add(edtA.getText().toString());
-                answers.add(edtB.getText().toString());
-                answers.add(edtC.getText().toString());
-                Question question=new Question(contentQuestion,answers,getContentCorrect(answers));
+                List<Answer> answers=new ArrayList<>();
+                answers.add(new Answer(String.valueOf(dbAnswer.getListAnswer().size()),edtA.getText().toString(),String.valueOf(questionId-1)));
+                answers.add(new Answer(String.valueOf(dbAnswer.getListAnswer().size()),edtB.getText().toString(),String.valueOf(questionId-1)));
+                answers.add(new Answer(String.valueOf(dbAnswer.getListAnswer().size()),edtC.getText().toString(),String.valueOf(questionId-1)));
+                Question question=new Question(String.valueOf(dbQuestion.getListQuestion().size()),contentQuestion,getContentCorrect(answers),TopicActivity.selectedIdTopic);
                 ListQuestionActivity.questions.add(question);
+                dbQuestion.addQuestion(String.valueOf(dbQuestion.getListQuestion().size()),contentQuestion,getContentCorrect(answers),TopicActivity.selectedIdTopic);
                 ListQuestionActivity.adapter.notifyDataSetChanged();
                 onBackPressed();
             }
@@ -98,15 +104,15 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnFoc
         ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayList);
         spnCorrect.setAdapter(adapter);
     }
-    private String getContentCorrect(List<String>answers) {
+    private String getContentCorrect(List<Answer>answers) {
         if (spnCorrect.getSelectedItem().equals("Đáp án A")){
-            return answers.get(0);
+            return answers.get(0).getText();
         }
         if (spnCorrect.getSelectedItem().equals("Đáp án B")){
-            return answers.get(1);
+            return answers.get(1).getText();
         }
         if (spnCorrect.getSelectedItem().equals("Đáp án C")){
-            return answers.get(2);
+            return answers.get(2).getText();
         }
         return "";
     }

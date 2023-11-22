@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
 import com.example.quickapp.adapter.CourseAdapter;
+import com.example.quickapp.database.DbCourse;
 import com.example.quickapp.models.Course;
 
 import java.util.ArrayList;
@@ -24,13 +25,16 @@ public class CourseActivity extends AppCompatActivity {
     ListView lvDSMH;
     Button btnXoa;
 
-    static int selectedCourse = -1;
+    static String selectedIdCourse = null;
+    static Course selectedCourse=new Course();
     List<Course> danhsachmonhoc;
+    DbCourse dbCourse=new DbCourse(this, null, null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_course);
+        danhsachmonhoc=dbCourse.getListCourse();
         setControl();
         setEvent();
     }
@@ -49,13 +53,14 @@ public class CourseActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Danh sách môn học");
 
-        CourseAdapter adapter = new CourseAdapter(MainActivity.courses, this);
+        CourseAdapter adapter = new CourseAdapter(danhsachmonhoc, this);
         lvDSMH.setAdapter(adapter);
 
         lvDSMH.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedCourse = i;
+                selectedIdCourse = danhsachmonhoc.get(i).getIdCourse();
+                selectedCourse=danhsachmonhoc.get(i);
                 Intent intent = new Intent(CourseActivity.this, TopicActivity.class);
                 startActivity(intent);
             }
@@ -63,6 +68,8 @@ public class CourseActivity extends AppCompatActivity {
         lvDSMH.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIdCourse = danhsachmonhoc.get(i).getIdCourse();
+                selectedCourse=danhsachmonhoc.get(i);
                 btnXoa.setVisibility(View.VISIBLE);
                 return false;
             }
@@ -71,7 +78,7 @@ public class CourseActivity extends AppCompatActivity {
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.courses.remove(selectedCourse);
+                danhsachmonhoc.remove(selectedCourse);
                 adapter.notifyDataSetChanged();
                 btnXoa.setVisibility(View.GONE);
                 setContentView(R.layout.activity_list_course);
@@ -111,7 +118,7 @@ public class CourseActivity extends AppCompatActivity {
                 lvDSMH.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        selectedCourse = i;
+                        selectedIdCourse = danhsachmonhoc.get(i).getIdCourse();
                         Intent intent = new Intent(CourseActivity.this, TopicActivity.class);
                         startActivity(intent);
                     }
@@ -127,7 +134,7 @@ public class CourseActivity extends AppCompatActivity {
                 btnXoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.courses.remove(selectedCourse);
+                        danhsachmonhoc.remove(selectedCourse);
                         adapter.notifyDataSetChanged();
                         btnXoa.setVisibility(View.GONE);
                     }

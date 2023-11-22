@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mn_Join"
+        android:title="Làm bài" />
+    <item
+        android:id="@+id/mn_CreateExam"
+        android:title="Tạo đề" />
+    <item
+        android:id="@+id/mn_History"
+        android:title="Lịch sử làm bài" />
+    <item
+        android:id="@+id/mn_ListQuestion"
+        android:title="Danh sách đề kiểm tra" />
+    <item
+        android:id="@+id/mn_Logout"
+        android:title="Đăng xuất" />
+</menu>

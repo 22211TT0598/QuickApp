@@ -1,46 +1,40 @@
 package com.example.quickapp.models;
 
 public class History {
-   private String mssv,name;
-    private String sorce;
-    private String Finishtime;
+    private String idHistory;
+    private String score;
+    private String finishTime;
 
-    public String getMssv() {
-        return mssv;
+    public String getIdHistory() {
+        return idHistory;
     }
 
-    public void setMssv(String mssv) {
-        this.mssv = mssv;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setIdHistory(String idHistory) {
+        this.idHistory = idHistory;
     }
 
     public String getSorce() {
-        return sorce;
+        return score;
     }
 
     public void setSorce(String sorce) {
-        this.sorce = sorce;
+        this.score = sorce;
     }
 
     public String getFinishtime() {
-        return Finishtime;
+        return finishTime;
     }
 
     public void setFinishtime(String finishtime) {
-        Finishtime = finishtime;
+        this.finishTime = finishtime;
     }
 
-    public History(String mssv, String name, String sorce, String Finishtime){
-        this.mssv=mssv;
-        this.name=name;
-        this.sorce=sorce;
-        this.Finishtime=Finishtime;
+    public History(String idHistory, String sorce, String finishtime) {
+        this.idHistory = idHistory;
+        this.score = sorce;
+        this.finishTime = finishtime;
+    }
+
+    public History() {
     }
 }

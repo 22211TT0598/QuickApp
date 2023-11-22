@@ -12,10 +12,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
 import com.example.quickapp.adapter.ShowQuestionAdapter;
+import com.example.quickapp.database.DbAnswer;
+import com.example.quickapp.database.DbQuestion;
+import com.example.quickapp.models.Answer;
 import com.example.quickapp.models.Question;
 import com.example.quickapp.models.Topic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListQuestionActivity extends AppCompatActivity {
@@ -23,17 +27,26 @@ public class ListQuestionActivity extends AppCompatActivity {
     ListView lvQuestions;
     FloatingActionButton btnAddQuestion;
 
-    static List<Question> questions;
+    static List<Question> questions=new ArrayList<>();
     Topic topic;
-    int positionFocused=-1;
+    static String selectedIdQuestion = null;
+    static Question selectedQuestion=new Question();
     static public ShowQuestionAdapter adapter;
+    DbQuestion dbQuestion=new DbQuestion(this,null,null,1);
+    DbAnswer dbAnswer=new DbAnswer(this,null,null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_question);
-        topic = MainActivity.courses.get(CourseActivity.selectedCourse).getTopics().get(TopicActivity.selectedTopic);
-        questions = topic.getQuestions();
+        if (dbQuestion.getListQuestion().size() != 0) {
+            questions.clear();
+            for (Question question : dbQuestion.getListQuestion()) {
+                if(question.getIdTopic().equals(TopicActivity.selectedIdTopic)){
+                    questions.add(question);
+                }
+            }
+        }
         setControl();
         setEvent();
     }
@@ -43,13 +56,15 @@ public class ListQuestionActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(topic.getNameTopic());
+        actionBar.setTitle(TopicActivity.selectedTopic.getNameTopic());
         adapter = new ShowQuestionAdapter(this, questions);
         lvQuestions.setAdapter(adapter);
 
         lvQuestions.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIdQuestion = questions.get(i).getIdQuestion();
+                selectedQuestion = questions.get(i);
                 for (Question item:questions) {
                     if (item.isShowLayoutEdit==true)
                     {
@@ -58,7 +73,6 @@ public class ListQuestionActivity extends AppCompatActivity {
                 }
                 questions.get(i).isShowLayoutEdit=true;
                 adapter.notifyDataSetChanged();
-                positionFocused=i;
 
                 return false;
             }
