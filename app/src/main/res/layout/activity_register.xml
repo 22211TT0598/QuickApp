@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RegisterActivity"
+    android:orientation="vertical"
+    android:background="#94E2592D">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E2592D"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_border_radius_login"
+        android:backgroundTint="@color/white"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mã Số Sinh Viên"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#785C53"/>
+        <EditText
+            android:id="@+id/edtMssv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_edt_normal"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên Đăng Nhập"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#785C53"/>
+        <EditText
+            android:id="@+id/edtTenDangNhap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_edt_normal"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mật Khẩu"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#785C53"/>
+        <EditText
+            android:id="@+id/edtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_edt_normal"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập Lại Mật Khẩu"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#785C53"/>
+        <EditText
+            android:id="@+id/edtPassXacNhan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_edt_normal"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnDangKi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="right"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:backgroundTint="#E2592D"/>
+
+</LinearLayout>

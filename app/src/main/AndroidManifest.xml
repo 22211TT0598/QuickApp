@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,40 +12,58 @@
         android:theme="@style/Theme.QuickApp"
         tools:targetApi="31">
         <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.HistoryActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.TopicActivity" />
         <activity
             android:name=".activity.ResultActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.JoinActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.TopicActivity" />
         <activity
             android:name=".activity.AddQuestionActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.ListQuestionActivity" />
         <activity
             android:name=".activity.UpdateQuestionActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.ListQuestionActivity" />
         <activity
             android:name=".activity.ListQuestionActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.TopicActivity" />
         <activity
             android:name=".activity.CreateExamDetailActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.CreateExamActivity" />
         <activity
             android:name=".activity.CreateExamActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.TopicActivity" />
         <activity
             android:name=".activity.TopicActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.CourseActivity" />
         <activity
             android:name=".activity.CourseActivity"
-            android:exported="false"/>
+            android:exported="false"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

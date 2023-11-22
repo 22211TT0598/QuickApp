@@ -16,11 +16,14 @@ import androidx.fragment.app.FragmentTransaction;
 import  android.os.SystemClock;
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbCourse;
+import com.example.quickapp.database.DbQuestion;
 import com.example.quickapp.fragment.SlideQuestionFragment;
 import com.example.quickapp.models.History;
 import com.example.quickapp.models.Question;
 import com.example.quickapp.models.Topic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JoinActivity extends AppCompatActivity {
@@ -29,11 +32,21 @@ public class JoinActivity extends AppCompatActivity {
     int dem = 0;
     static long dateStart;
     Button btnNext, btnDone, btnConfirm;
+    DbCourse dbCourse=new DbCourse(this, null, null,1);
+    DbQuestion dbQuestion=new DbQuestion(this,null,null,1);
+    List<Question> questions=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activiy_join_exam);
+        if (dbQuestion.getListTopic().size() != 0) {
+            for (Question question : dbQuestion.getListQuestion()) {
+                if(question.getIdTopic().equals(TopicActivity.selectedIdTopic)){
+                    questions.add(question);
+                }
+            }
+        }
         SetControl();
         SetEvent();
 
@@ -54,9 +67,7 @@ public class JoinActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(MainActivity.courses.get(CourseActivity.selectedCourse).getNameCourse());
-
-        List<Question> questions = MainActivity.courses.get(CourseActivity.selectedCourse).getTopics().get(TopicActivity.selectedTopic).getQuestions();
+        actionBar.setTitle(CourseActivity.selectedCourse.getNameCourse());
 
         SlideQuestionFragment fragment = new SlideQuestionFragment(questions.get(position), JoinActivity.this);
         FragmentTransaction fragmentManager = getSupportFragmentManager().beginTransaction();
@@ -110,7 +121,6 @@ public class JoinActivity extends AppCompatActivity {
                itn.putExtra("getResult",dem);
                itn.putExtra("getTotalQuestion",questions.size());
                startActivity(itn);
-
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {

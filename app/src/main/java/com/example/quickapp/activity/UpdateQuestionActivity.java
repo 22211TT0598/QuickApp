@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbAnswer;
+import com.example.quickapp.database.DbQuestion;
+import com.example.quickapp.models.Answer;
 import com.example.quickapp.models.Question;
 
 import java.util.ArrayList;
@@ -30,12 +33,14 @@ public class UpdateQuestionActivity extends AppCompatActivity implements View.On
     EditText edtC;
     Spinner spnCorrect;
     Button btnFinish;
-    int questionId;
+    int index;
+    DbQuestion dbQuestion=new DbQuestion(this,null,null,1);
+    DbAnswer dbAnswer=new DbAnswer(this,null,null,1);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_a_question);
-        questionId=getIntent().getIntExtra("getQuestionId",-1);
+        index=getIntent().getIntExtra("getQuestionId",-1);
         setControl();
         setEvent();
     }
@@ -59,17 +64,40 @@ public class UpdateQuestionActivity extends AppCompatActivity implements View.On
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<String>answers=new ArrayList<>();
-                answers.add(edtA.getText().toString());
-                answers.add(edtB.getText().toString());
-                answers.add(edtC.getText().toString());
-                Question question1=new Question(edtQuestion.getText().toString(),answers,getContentCorrect(answers));
-                ListQuestionActivity.questions.set(questionId,question1);
+                updateQuestion();
                 ListQuestionActivity.adapter.notifyDataSetChanged();
                 onBackPressed();
             }
         });
     }
+
+    private void updateQuestion() {
+        List<String>answers=new ArrayList<>();
+        answers.add(edtA.getText().toString());
+        answers.add(edtB.getText().toString());
+        answers.add(edtC.getText().toString());
+
+        Question newQuestion=new Question(ListQuestionActivity.selectedIdQuestion,edtQuestion.getText().toString(),getContentCorrect(answers),CourseActivity.selectedIdCourse);
+        dbQuestion.updateQuestion(newQuestion.getIdQuestion(), newQuestion.getTitle(), newQuestion.getCorrect());
+        ListQuestionActivity.questions.get(index).setTitle(newQuestion.getTitle());
+        ListQuestionActivity.questions.get(index).setCorrect(newQuestion.getCorrect());
+
+        updateAnswers();
+    }
+
+    private void updateAnswers() {
+        List<Answer>answers=new ArrayList<>();
+        for(Answer answer:dbAnswer.getListAnswer()){
+            if(answer.getIdQuestion().equals(ListQuestionActivity.selectedIdQuestion)){
+                answers.add(answer);
+            }
+        }
+
+        dbAnswer.updateAnswer(answers.get(0).getIdAnswer(),edtA.getText().toString());
+        dbAnswer.updateAnswer(answers.get(1).getIdAnswer(),edtB.getText().toString());
+        dbAnswer.updateAnswer(answers.get(2).getIdAnswer(),edtC.getText().toString());
+    }
+
 
     private void setControl() {
         toolbar=findViewById(R.id.toolbar);
@@ -84,16 +112,31 @@ public class UpdateQuestionActivity extends AppCompatActivity implements View.On
     }
 
     private void setDataIntoViews(){
-        tvTitle.setText("Câu "+(questionId+1));
-        edtQuestion.setText(ListQuestionActivity.questions.get(questionId).getTitle());
-        edtA.setText(ListQuestionActivity.questions.get(questionId).getAnswers().get(0));
-        edtB.setText(ListQuestionActivity.questions.get(questionId).getAnswers().get(1));
-        edtC.setText(ListQuestionActivity.questions.get(questionId).getAnswers().get(2));
+        Question question=new Question();
+        for (Question item:dbQuestion.getListQuestion()) {
+            if(item.getIdQuestion().equals(ListQuestionActivity.selectedIdQuestion)){
+                question=item;
+                break;
+            }
+        }
+
+        tvTitle.setText("Câu "+(index+1));
+        edtQuestion.setText(question.getTitle());
+        List<Answer>answers=new ArrayList<>();
+        DbAnswer dbAnswer=new DbAnswer(this,null,null,1);
+        for (Answer item:dbAnswer.getListAnswer()) {
+            if(item.getIdQuestion().equals(ListQuestionActivity.selectedIdQuestion)){
+                answers.add(item);
+            }
+        }
+        edtA.setText(answers.get(0).getText());
+        edtB.setText(answers.get(1).getText());
+        edtC.setText(answers.get(2).getText());
         getDataSpinner();
-        if (ListQuestionActivity.questions.get(questionId).getCorrect().equals(edtA.getText().toString())){
+        if (question.getCorrect().equals(edtA.getText().toString())){
             spnCorrect.setSelection(0);
         }
-        else if (ListQuestionActivity.questions.get(questionId).getCorrect().equals(edtB.getText().toString())){
+        else if (question.getCorrect().equals(edtB.getText().toString())){
             spnCorrect.setSelection(1);
         }
         else {

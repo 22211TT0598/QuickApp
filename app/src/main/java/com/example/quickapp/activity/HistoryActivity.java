@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
 import com.example.quickapp.adapter.HistoryAdapter;
+import com.example.quickapp.database.DbHistory;
 import com.example.quickapp.models.History;
 
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ public class HistoryActivity extends AppCompatActivity {
     ListView lstDS;
     List<History>danhsachTimKiem=new ArrayList<>();
     EditText edtTimKIem;
-
+    List<History>danhsachlichsu=new ArrayList<>();
+    DbHistory dbHistory=new DbHistory(this,null,null,1);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_history);
+        danhsachlichsu=dbHistory.getListHistory();
         SetControl();
         SetEvent();
     }
@@ -61,7 +64,7 @@ public class HistoryActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Danh sách môn học");
 
-        adapter= new HistoryAdapter(MainActivity.danhsachlichsu,this);
+        adapter= new HistoryAdapter(danhsachlichsu,this);
         lstDS.setAdapter(adapter);
 
         lstDS.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -72,7 +75,9 @@ public class HistoryActivity extends AppCompatActivity {
                 btnDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MainActivity.danhsachlichsu.remove(position);
+                        DbHistory db=new DbHistory(getBaseContext(),null,null,1);
+                        db.deleteHistory(danhsachlichsu.get(position).getIdHistory());
+                        danhsachlichsu.remove(position);
                         adapter.notifyDataSetChanged();
                         btnDelete.setVisibility(View.GONE);
                     }
@@ -100,40 +105,40 @@ public class HistoryActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.btnXoaTatCa)
         {
-            MainActivity.danhsachlichsu.clear();
+            danhsachlichsu.clear();
             adapter.notifyDataSetChanged();
         }
         if(item.getItemId()==R.id.btnTim)
         {
-           btnSearch.setVisibility(View.VISIBLE);
-           dsCanTim();
+//           btnSearch.setVisibility(View.VISIBLE);
+//           dsCanTim();
 
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void dsCanTim() {
-        edtTimKIem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (v.getText().toString().isEmpty()){
-                    lstDS.setAdapter(adapter);
-                }
-                if (actionId== EditorInfo.IME_ACTION_GO){
-                    danhsachTimKiem.clear();
-                    for (History item:MainActivity.danhsachlichsu) {
-                        if ((item.getMssv()).contains(v.getText())){
-                            danhsachTimKiem.add(item);
-                        }
-                    }
-                    HistoryAdapter adapter1=new HistoryAdapter(danhsachTimKiem,HistoryActivity.this);
-                    lstDS.setAdapter(adapter1);
-                    edtTimKIem.clearFocus();
-                }
-                return false;
-            }
-        });
-    }
+//    private void dsCanTim() {
+//        edtTimKIem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//           public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (v.getText().toString().isEmpty()){
+//                    lstDS.setAdapter(adapter);
+//                }
+//                if (actionId== EditorInfo.IME_ACTION_GO){
+//                    danhsachTimKiem.clear();
+//                    for (History item:MainActivity.danhsachlichsu) {
+//                        if ((item.get).contains(v.getText())){
+//                            danhsachTimKiem.add(item);
+//                        }
+//                    }
+//                    HistoryAdapter adapter1=new HistoryAdapter(danhsachTimKiem,HistoryActivity.this);
+//                    lstDS.setAdapter(adapter1);
+//                    edtTimKIem.clearFocus();
+//                }
+//                return false;
+//            }
+//        });
+//    }
 
 
 }

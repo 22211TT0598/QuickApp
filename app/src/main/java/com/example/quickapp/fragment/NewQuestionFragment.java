@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbAnswer;
+import com.example.quickapp.database.DbQuestion;
+import com.example.quickapp.models.Answer;
 import com.example.quickapp.models.Question;
 
 import java.util.ArrayList;
@@ -24,17 +27,21 @@ import java.util.List;
 public class NewQuestionFragment extends Fragment implements View.OnFocusChangeListener {
     LinearLayout layoutScreen;
     TextView tvTitle;
-    EditText edtQuestion;
-    EditText edtA;
-    EditText edtB;
-    EditText edtC;
-    Spinner spnCorrect;
+    public EditText edtQuestion;
+    public EditText edtA;
+    public EditText edtB;
+    public EditText edtC;
+    public Spinner spnCorrect;
     Context context;
-    int position;
+    String idTopic;
+    int index;
+    DbQuestion dbQuestion=new DbQuestion(getActivity(),null,null,1);
+    DbAnswer dbAnswer=new DbAnswer(getActivity(),null,null,1);
 
-    public NewQuestionFragment(Context context,int position) {
+    public NewQuestionFragment(Context context,int index,String idTopic) {
         this.context = context;
-        this.position=position;
+        this.index=index;
+        this.idTopic=idTopic;
     }
 
     @Nullable
@@ -54,7 +61,7 @@ public class NewQuestionFragment extends Fragment implements View.OnFocusChangeL
         edtC = view.findViewById(R.id.edtDapAnC);
         spnCorrect = view.findViewById(R.id.spinnerCorrect);
 
-        tvTitle.setText("Câu "+(position+1));
+        tvTitle.setText("Câu "+(index+1));
 
         layoutScreen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,29 +87,6 @@ public class NewQuestionFragment extends Fragment implements View.OnFocusChangeL
         //Set data for spinner
         ArrayAdapter adapter = new ArrayAdapter(context, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrayList);
         spnCorrect.setAdapter(adapter);
-    }
-
-    public Question getQuestionFromFragment() {
-        String contentQuestion = edtQuestion.getText().toString().trim();
-        List<String> answers=new ArrayList<>();
-        answers.add(edtA.getText().toString());
-        answers.add(edtB.getText().toString());
-        answers.add(edtC.getText().toString());
-        Question question=new Question(contentQuestion,answers,getContentCorrect(answers));
-        return question;
-    }
-
-    private String getContentCorrect(List<String >answers) {
-        if (spnCorrect.getSelectedItem().equals("Đáp án A")){
-            return answers.get(0);
-        }
-        if (spnCorrect.getSelectedItem().equals("Đáp án B")){
-            return answers.get(1);
-        }
-        if (spnCorrect.getSelectedItem().equals("Đáp án C")){
-            return answers.get(2);
-        }
-        return "";
     }
 
     @Override

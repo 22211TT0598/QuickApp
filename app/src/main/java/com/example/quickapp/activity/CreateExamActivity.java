@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbCourse;
+import com.example.quickapp.database.DbTopic;
 import com.example.quickapp.models.Course;
 import com.example.quickapp.models.Topic;
 
@@ -24,6 +26,9 @@ public class CreateExamActivity extends AppCompatActivity {
     Button btnNext;
     EditText edtCourse, edtNumQuestion;
     Toolbar toolbar;
+
+    DbCourse dbCourse=new DbCourse(this, null, null,1);
+    DbTopic dbTopic=new DbTopic(this,null,null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,26 +90,34 @@ public class CreateExamActivity extends AppCompatActivity {
                 intent.putExtra("getNumQuestion", numQuestion);
 
                 boolean check=false;
-                int i=0;
-                for (Course item:MainActivity.courses) {
+                Course course=new Course();
+                for (Course item:dbCourse.getListCourse()) {
                     if (nameCourse.equals(item.getNameCourse()))
                     {
                         check=true;
-                        String name="Đề số"+(item.getTopics().size()+1);
-                        Topic topic=new Topic(new ArrayList<>(),name);
-                        item.getTopics().add(topic);
-                        intent.putExtra("getCourseId", i);
+                        course=item;
                         break;
                     }
-                    i++;
+                }
+                int num=0;
+                if (dbTopic.getListTopic().size() != 0) {
+                    for (Topic topic : dbTopic.getListTopic()) {
+                        if(topic.getIdCourse().equals(course.getIdCourse())){
+                            num++;
+                        }
+                    }
                 }
                 if (check==false){
                     String name="Đề số 1";
                     Topic topic=new Topic(new ArrayList<>(),name);
-                    List<Topic>topics=new ArrayList<>();
-                    topics.add(topic);
-                    MainActivity.courses.add(new Course(nameCourse,topics));
-                    intent.putExtra("getCourseId", MainActivity.courses.size()-1);
+                    dbCourse.addCourse(String.valueOf(dbCourse.getListCourse().size()),nameCourse);
+                    dbTopic.addTopic(String.valueOf(dbTopic.getListTopic().size()),name,String.valueOf(dbCourse.getListCourse().size()-1));
+                    intent.putExtra("getCourseId", String.valueOf(dbCourse.getListCourse().size()));
+                }else {
+                    String name="Đề số "+(num+1);
+//                    Topic topic=new Topic(new ArrayList<>(),name);
+                    dbTopic.addTopic(String.valueOf(dbTopic.getListTopic().size()),name,course.getIdCourse());
+                    intent.putExtra("getCourseId", course.getIdCourse());
                 }
                 startActivity(intent);
             }

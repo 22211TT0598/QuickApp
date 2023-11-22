@@ -12,8 +12,12 @@ import android.widget.TextView;
 
 import com.example.quickapp.R;
 import com.example.quickapp.activity.UpdateQuestionActivity;
+import com.example.quickapp.database.DbAnswer;
+import com.example.quickapp.database.DbQuestion;
+import com.example.quickapp.models.Answer;
 import com.example.quickapp.models.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowQuestionAdapter extends BaseAdapter {
@@ -64,6 +68,8 @@ public class ShowQuestionAdapter extends BaseAdapter {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DbQuestion dbQuestion=new DbQuestion(context,null,null,1);
+                dbQuestion.deleteQuestion(arrayList.get(i).getIdQuestion());
                 arrayList.remove(i);
                 notifyDataSetChanged();
                 layout.setVisibility(View.GONE);
@@ -72,9 +78,18 @@ public class ShowQuestionAdapter extends BaseAdapter {
 
         lbQuestion.setText("Câu " + (i + 1) + ": ");
         tvQuestion.setText(arrayList.get(i).getTitle());
-        tvA.setText("A." + arrayList.get(i).getAnswers().get(0));
-        tvB.setText("B." + arrayList.get(i).getAnswers().get(1));
-        tvC.setText("C." + arrayList.get(i).getAnswers().get(2));
+
+        List<Answer>answers=new ArrayList<>();
+        DbAnswer dbAnswer=new DbAnswer(context,null,null,1);
+        for (Answer item:dbAnswer.getListAnswer()) {
+            if(item.getIdQuestion().equals(arrayList.get(i).getIdQuestion())){
+                answers.add(item);
+            }
+        }
+
+        tvA.setText("A." + answers.get(0).getText());
+        tvB.setText("B." + answers.get(1).getText());
+        tvC.setText("C." + answers.get(2).getText());
         tvCorrect.setText(arrayList.get(i).getCorrect());
 
         btnEdit.setOnClickListener(new View.OnClickListener() {

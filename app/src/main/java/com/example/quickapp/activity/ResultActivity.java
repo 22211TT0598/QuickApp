@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.quickapp.R;
+import com.example.quickapp.database.DbHistory;
 import com.example.quickapp.models.History;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView tvDiem;
     int dem;
     int cauHoi;
+    DbHistory dbHistory=new DbHistory(this,null,null,1);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,7 @@ public class ResultActivity extends AppCompatActivity {
        int kq=(10/cauHoi)*dem;
        tvDiem.setText(String.valueOf(kq));
         long dateEnd= SystemClock.elapsedRealtime()/1000;
-
-        MainActivity.danhsachlichsu.add(new History("22211TT0826","phu",String.valueOf(kq),String.valueOf(dateEnd-JoinActivity.dateStart)+" Giây"));
+        dbHistory.addHistory(String.valueOf(dbHistory.getListHistory().size()),String.valueOf(kq),String.valueOf(dateEnd-JoinActivity.dateStart)+" Giây","22211TT0826");
     }
 
     private void SetEvent() {

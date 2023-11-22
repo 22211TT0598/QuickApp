@@ -45,8 +45,8 @@ public class HistoryAdapter extends BaseAdapter {
         View viewProduct= LayoutInflater.from(context).inflate(R.layout.item_history,null);
 
         History product = list.get(position);
-        ((TextView) viewProduct.findViewById(R.id.mssv)).setText("mssv: "+ product.getMssv());
-        ((TextView) viewProduct.findViewById(R.id.name)).setText("name : "+ product.getName());
+//        ((TextView) viewProduct.findViewById(R.id.mssv)).setText("mssv: "+ product.getMssv());
+//        ((TextView) viewProduct.findViewById(R.id.name)).setText("name : "+ product.getName());
         ((TextView) viewProduct.findViewById(R.id.sorce)).setText("sorce:  "+ product.getSorce());
         ((TextView) viewProduct.findViewById(R.id.Finishtime)).setText("Finish time: "+ product.getFinishtime());
 
